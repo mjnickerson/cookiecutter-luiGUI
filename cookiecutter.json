@@ -1,0 +1,29 @@
+{
+    "graph_type" : ["New Project", "Model Process"],
+    "full_name": "Your name",
+    "email": "Your address email (eq. you@example.com)",
+
+    "project_name": "Nameless",
+    "dag_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+
+    "dag_short_description": "A short description of the project",
+
+    "node_1": "Node 1",
+    "node_2": "Node 2",
+    "node_3": "Node 3",
+    "node_4": "Node 5",
+    "node_5": "Node 5",
+
+    "node3_run_target": "s3_atomic_download",
+    "node4_run_target": "python -m model_process",
+
+    "node1_target_entry": "s3://",
+    "node3_output_folder": "output/",
+    "node5_target_output": "output/",
+
+    "release_date": "{% now 'local' %}",
+    "version": "1.0.0",
+
+    "node_1_aws_access_id": "access_id",
+    "node_1_aws_secret_key": "Shhhh..... SECRET"
+}
