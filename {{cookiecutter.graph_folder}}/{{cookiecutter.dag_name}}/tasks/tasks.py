@@ -46,7 +46,7 @@ class {{cookiecutter.node_3}}(Task):
         return {{cookiecutter.node_2}}(self.file)
 
     def run(self):
-        {{cookiecutter.node_3_run}})self
+        {{cookiecutter.node3_run_target}})self
         # Atomically copy the file locally
         # s3_atomic_download(self)
 
