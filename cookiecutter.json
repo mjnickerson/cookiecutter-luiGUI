@@ -1,5 +1,4 @@
 {
-    "graph_type" : ["New Project", "Model Process"],
     "full_name": "Your name",
     "email": "Your address email (eq. you@example.com)",
 
@@ -8,18 +7,18 @@
     "dag_name": "{{ cookiecutter.graph_name.lower().replace(' ', '_') }}",
     "dag_short_description": "A short description of the project",
 
-    "node_1": "Node 1",
-    "node_2": "Node 2",
-    "node_3": "Node 3",
-    "node_4": "Node 5",
-    "node_5": "Node 5",
+    "node_1": "Node_1",
+    "node_2": "Node_2",
+    "node_3": "Node_3",
+    "node_4": "Node_4",
+    "node_5": "Node_5",
 
     "node3_run_target": "s3_atomic_download.py",
-    "node4_run_target": "python -m model_process",
+    "node4_run_target": "python -m {{cookiecutter.dag_name}}",
 
-    "node1_target_entry": "s3://",
-    "node3_output_folder": "output/",
-    "node5_target_output": "output/",
+    "node1_target_entry": "s3://pset-4-data-mjnickerson/pset_4/",
+    "node3_output_folder": "data/input/",
+    "node5_target_output": "data/output/",
 
     "release_date": "{% now 'local' %}",
     "version": "1.0.0",
