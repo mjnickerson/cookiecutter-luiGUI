@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `{{ cookiecutter.project_slug }}` package."""
+"""Tests for `{{cookiecutter.graph_folder}}` package."""
 
 import os
 from unittest import TestCase

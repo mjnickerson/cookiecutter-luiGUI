@@ -6,6 +6,10 @@ from lui_gui.io.target import SuffixPreservingLocalTarget
 from lui_gui.io import s3_atomic_download
 
 
+# {% if cookiecutter.install_csci_utils == 'yes' -%}
+# csci-utils = {editable = true,git = "https://github.com/csci-e-29/2019fa-csci-utils-mjnickerson"}
+# {% endif -%}
+
 class Run_lui_gui(WrapperTask):
     """
     Wrapper Task - to set Parameters for file download

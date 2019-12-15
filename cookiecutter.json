@@ -3,9 +3,9 @@
     "full_name": "Your name",
     "email": "Your address email (eq. you@example.com)",
 
-    "project_name": "Nameless",
-    "dag_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-
+    "graph_name": "Nameless",
+    "graph_folder": "{{ cookiecutter.graph_name.lower().replace(' ', '_') }}_graph",
+    "dag_name": "{{ cookiecutter.graph_name.lower().replace(' ', '_') }}",
     "dag_short_description": "A short description of the project",
 
     "node_1": "Node 1",
@@ -14,7 +14,7 @@
     "node_4": "Node 5",
     "node_5": "Node 5",
 
-    "node3_run_target": "s3_atomic_download",
+    "node3_run_target": "s3_atomic_download.py",
     "node4_run_target": "python -m model_process",
 
     "node1_target_entry": "s3://",

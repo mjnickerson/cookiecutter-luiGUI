@@ -31,4 +31,4 @@ jobs:
     - stage: answers
       script:
       # credentials entered at https://travis-ci.com/csci-e-29/YOUR_PSET_REPO_NAME/settings
-      - python3 -m {{ cookiecutter.project_slug }}
+      - python3 -m {{cookiecutter.dag_name}}
