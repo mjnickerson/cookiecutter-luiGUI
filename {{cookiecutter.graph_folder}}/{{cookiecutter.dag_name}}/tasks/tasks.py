@@ -2,8 +2,8 @@ import os
 from luigi.contrib.external_program import ExternalProgramTask
 from luigi import format, Parameter, WrapperTask, ExternalTask, Task, LocalTarget
 from luigi.contrib.s3 import S3Target
-from lui_gui.io.target import SuffixPreservingLocalTarget
-from lui_gui.io.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
+from lui_gui.src.target import SuffixPreservingLocalTarget
+from lui_gui.src.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
 
 
 class Run_lui_gui(WrapperTask):

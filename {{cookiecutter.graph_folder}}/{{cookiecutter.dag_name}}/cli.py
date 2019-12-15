@@ -1,7 +1,6 @@
 import argparse
 from luigi import build
-from .lui_gui.io.tasks import Run_lui_gui
-
+from {{cookiecutter.dag_name}}.tasks.tasks import Run_lui_gui
 
 # DEFAULT ENTRY, JUST IN CASE:
 #parser = argparse.ArgumentParser(description='Command description.')
