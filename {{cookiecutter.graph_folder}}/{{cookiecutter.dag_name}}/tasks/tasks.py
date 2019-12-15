@@ -6,9 +6,7 @@ from lui_gui.io.target import SuffixPreservingLocalTarget
 from lui_gui.io.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
 
 
-# {% if graph_type.install_csci_utils == 'New Project' -%}
-# CONDITIONAL STATEMENT
-# {% endif -%}
+
 
 class Run_lui_gui(WrapperTask):
     """
