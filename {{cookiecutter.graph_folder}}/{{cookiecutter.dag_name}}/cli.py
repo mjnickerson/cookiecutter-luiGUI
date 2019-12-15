@@ -16,8 +16,8 @@ from tasks.tasks import Run_lui_gui
 
 #DO NOT NEED TO PARSE ARGUMENTS, SINCE WE ARE AUTOFILLING THE COOKIECUTTER
 parser = argparse.ArgumentParser(description='Command description.')
-#parser.add_argument("-f", "--file", default="luigi.jpg") # what torch model to use
-#parser.add_argument("-r", "--root", default="data") # subdirectory for model
+parser.add_argument("-f", "--file", default="luigi.jpg") # what torch model to use
+parser.add_argument("-r", "--root", default="data") # subdirectory for model
 
 
 def main_script(args=None):
