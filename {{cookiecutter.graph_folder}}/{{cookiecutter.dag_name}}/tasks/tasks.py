@@ -3,11 +3,11 @@ from luigi.contrib.external_program import ExternalProgramTask
 from luigi import format, Parameter, WrapperTask, ExternalTask, Task, LocalTarget
 from luigi.contrib.s3 import S3Target
 from lui_gui.io.target import SuffixPreservingLocalTarget
-from lui_gui.io import s3_atomic_download
+from lui_gui.io.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
 
 
-# {% if cookiecutter.install_csci_utils == 'yes' -%}
-# csci-utils = {editable = true,git = "https://github.com/csci-e-29/2019fa-csci-utils-mjnickerson"}
+# {% if graph_type.install_csci_utils == 'New Project' -%}
+# CONDITIONAL STATEMENT
 # {% endif -%}
 
 class Run_lui_gui(WrapperTask):

@@ -1,26 +1,29 @@
-"""
-Module that contains the command line app.
-
-Why does this file exist, and why not put this in __main__?
-
-  You might be tempted to import things from __main__ later, but that will cause
-  problems: the code will get executed twice:
-
-  - When you run `python -mcsci_utils` python will execute
-    ``__main__.py`` as a script. That means there won't be any
-    ``csci_utils.__main__`` in ``sys.modules``.
-  - When you import __main__ it will get executed again (as a module) because
-    there's no ``csci_utils._main__`` in ``sys.modules``.
-
-  Also see (1) from http://click.pocoo.org/5/setuptools/#setuptools-integration
-"""
 import argparse
+from luigi import build
+from .lui_gui.io.{{cookiecutter.node4_run_target}} import {{cookiecutter.node4_run_target}}
+
+
+# DEFAULT ENTRY, JUST IN CASE:
+#parser = argparse.ArgumentParser(description='Command description.')
+#parser.add_argument('names', metavar='NAME', nargs=argparse.ZERO_OR_MORE,
+#                    help="A name of something.")
+
+
+#def main_script(args=None):
+#    args = parser.parse_args(args=args)
+#    print(args.names)
+
 
 parser = argparse.ArgumentParser(description='Command description.')
-parser.add_argument('names', metavar='NAME', nargs=argparse.ZERO_OR_MORE,
-                    help="A name of something.")
+parser.add_argument("-i", "--image", default="luigi.jpg") # what torch model to use
+parser.add_argument("-m", "--model", default="mosaic.pth") # what image to stylize
+parser.add_argument("-r", "--root", default="data") # subdirectory for model
 
 
 def main_script(args=None):
     args = parser.parse_args(args=args)
-    print(args.names)
+
+    build([
+        {{cookiecutter.node4_run_target}}(args.model, args.image, args.root)
+    ], local_scheduler=True)
+
