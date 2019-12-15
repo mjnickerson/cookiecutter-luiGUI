@@ -13,7 +13,7 @@
     "node_4": "Node_4",
     "node_5": "Node_5",
 
-    "node3_run_target": "s3_atomic_download.py",
+    "node3_run_target": "s3_atomic_download",
     "node4_run_target": "python -m {{cookiecutter.dag_name}}",
 
     "node1_target_entry": "s3://pset-4-data-mjnickerson/pset_4/",

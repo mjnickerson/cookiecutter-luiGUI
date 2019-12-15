@@ -30,7 +30,7 @@ class {{cookiecutter.node_2}}(ExternalTask):
 
 
     def output(self):
-        return S3Target({{cookiecutter.node1_target_entry}},format=format.Nop) #this is node_1
+        return S3Target("{{cookiecutter.node1_target_entry}}",format=format.Nop) #this is node_1
 
 
 class {{cookiecutter.node_3}}(Task):
@@ -46,40 +46,40 @@ class {{cookiecutter.node_3}}(Task):
         return {{cookiecutter.node_2}}(self.file)
 
     def run(self):
-        {{cookiecutter.node3_run_target}})self
+        {{cookiecutter.node3_run_target}}(self)
         # Atomically copy the file locally
         # s3_atomic_download(self)
 
     def output(self):
         self.LOCAL_ROOT = os.path.abspath(self.root) #set root directory for LocalTarget
-        return LocalTarget({{cookiecutter.node3_output_folder}}, self.file)),format=format.Nop)
+        return LocalTarget("{{cookiecutter.node3_output_folder}}", self.file)), format=format.Nop)
 
 
 class {{cookiecutter.node_4}}(ExternalProgramTask):
     """
-    Stylize image with specified torch model
+    Run the external program task {{cookiecutter.node4_run_target}}
     """
     file = Parameter() #file name
     root = Parameter()  #subdirectory for model
     LOCAL_ROOT = os.path.abspath("temp_run_stylize_subdir")
-    output_dir_name = {{cookiecutter.node5_target_output}}
+    output_dir_name = "{{cookiecutter.node5_target_output}}"
     output_dir = (os.path.join(LOCAL_ROOT, output_dir_name))
 
 
     def requires(self):
-        """ Requires Node 2 already downloaded
+        """ Requires {{cookiecutter.node_2}} already downloaded
         :return model: Local Target of Model
         Note: passes Luigi Parameters for model
         """
         return {
-            'model': {{cookiecutter.node_3}}(self.file, self.root),
+            'file': {{cookiecutter.node_3}}(self.file, self.root),
         }
 
     def program_args(self):
-        """ Command line arguments to call torch model
+        """ Command line arguments to call external program {{cookiecutter.node_4}}
         :return args: CLI args
         """
-        return [{{cookiecutter.node4_run_target}}, os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.image) ,'--file',
+        return [{{cookiecutter.node4_run_target}}, os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--file',
                 os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--output-file', self.temp_output_path ]
 
     def run(self):
@@ -94,4 +94,4 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
         self.output_dir = (os.path.join(self.LOCAL_ROOT, self.output_dir_name)) #set output directory for SufPresLocTarg
         # return SuffixPreservingLocalTarget of the stylized image
         output_file_name = (os.path.splitext(self.file)[0]+"_processed")
-        return SuffixPreservingLocalTarget({{cookiecutter.node5_target_output}},format=format.Nop)
+        return SuffixPreservingLocalTarget("{{cookiecutter.node5_target_output}}",format=format.Nop) # <-- {{cookiecutter.node_5}}
