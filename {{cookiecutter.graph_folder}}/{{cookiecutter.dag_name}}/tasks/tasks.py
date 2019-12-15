@@ -79,7 +79,7 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
         """ Command line arguments to call external program {{cookiecutter.node_4}}
         :return args: CLI args
         """
-        return [{{cookiecutter.node4_run_target}}, os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--file',
+        return ['{{cookiecutter.node4_run_target}}', os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--file',
                 os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--output-file', self.temp_output_path ]
 
     def run(self):
