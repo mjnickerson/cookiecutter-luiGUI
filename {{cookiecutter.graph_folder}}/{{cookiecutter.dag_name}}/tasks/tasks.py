@@ -52,7 +52,7 @@ class {{cookiecutter.node_3}}(Task):
 
     def output(self):
         self.LOCAL_ROOT = os.path.abspath(self.root) #set root directory for LocalTarget
-        return LocalTarget("{{cookiecutter.node3_output_folder}}", self.file), format=format.Nop))
+        return LocalTarget("{{cookiecutter.node3_output_folder}}", self.file, format=format.Nop)
 
 
 class {{cookiecutter.node_4}}(ExternalProgramTask):
