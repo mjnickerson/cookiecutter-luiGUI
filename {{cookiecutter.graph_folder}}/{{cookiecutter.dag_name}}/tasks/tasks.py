@@ -6,8 +6,6 @@ from lui_gui.io.target import SuffixPreservingLocalTarget
 from lui_gui.io.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
 
 
-
-
 class Run_lui_gui(WrapperTask):
     """
     Wrapper Task - to set Parameters for file download
