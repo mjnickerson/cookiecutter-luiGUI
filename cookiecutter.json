@@ -3,8 +3,8 @@
     "email": "Your address email (eq. you@example.com)",
 
     "graph_name": "Nameless",
-    "graph_folder": "{{ cookiecutter.graph_name.lower().replace(' ', '_') }}_graph",
-    "dag_name": "{{ cookiecutter.graph_name.lower().replace(' ', '_') }}",
+    "graph_folder": "{{ cookiecutter.graph_name.lower().replace(' ', '_') }}",
+    "dag_name": "{{ cookiecutter.graph_name.lower().replace(' ', '_') }}_graph",
     "dag_short_description": "A short description of the project",
 
     "node_1": "Node_1",
