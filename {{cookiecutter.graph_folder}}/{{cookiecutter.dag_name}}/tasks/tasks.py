@@ -14,7 +14,7 @@ class Run_{{cookiecutter.graph_folder}}(WrapperTask):
         print("Running Lui_GUI graph {{cookiecutter.graph_folder}}!")
 
     def requires(self):
-        return {{cookiecutter.node_4}}
+        return {{cookiecutter.node_4}}()
 
 
 class {{cookiecutter.node_2}}(ExternalTask):
@@ -27,7 +27,7 @@ class {{cookiecutter.node_3}}(Task):
     # Download to Local Target
     def requires(self):
         # Depends on the SavedModel ExternalTask being complete
-        return {{cookiecutter.node_2}}
+        return {{cookiecutter.node_2}}()
 
     def run(self):
         {{cookiecutter.node3_run_target}}(self)
@@ -50,9 +50,7 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
         :return model: Local Target of Model
         Note: passes Luigi Parameters for model
         """
-        return {
-            'file': {{cookiecutter.node_3}},
-        }
+        return {{cookiecutter.node_3}}()
 
     def program_args(self):
         """ Command line arguments to call external program {{cookiecutter.node_4}}
