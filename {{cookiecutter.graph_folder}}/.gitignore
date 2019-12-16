@@ -92,7 +92,7 @@ celerybeat-schedule
 # Rope project settings
 .ropeproject
 
-# mkdocs documentation
+# mkdocs documentationz
 /site
 
 # mypy
@@ -102,3 +102,6 @@ celerybeat-schedule
 .png
 notes.txt
 /.gitkeep
+
+
+
