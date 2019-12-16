@@ -6,12 +6,12 @@ from lui_gui.src.target import SuffixPreservingLocalTarget
 from scripts.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
 
 
-class Run_lui_gui(WrapperTask):
+class Run_{{cookiecutter.graph_folder}}(WrapperTask):
     """
     Wrapper Task - to set Parameters for file download
     """
     def run(self):
-        print("Running Lui_GUI graph {{cookiecutter.dag_name}}!")
+        print("Running Lui_GUI graph {{cookiecutter.graph_folder}}!")
 
     def requires(self):
         return {{cookiecutter.node_4}}
