@@ -16,6 +16,7 @@
     "node4_run_target": "python -m {{cookiecutter.dag_name}}",
 
     "node1_target_entry": "s3://pset-4-data-mjnickerson/pset_4/",
+    "node1_target_filename": "sample.jpg",
     "node3_output_folder": "data/input/",
     "node4_input_params": "data/input/",
     "node5_target_output": "data/output/",
