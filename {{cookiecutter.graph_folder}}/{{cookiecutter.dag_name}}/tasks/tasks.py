@@ -3,47 +3,31 @@ from luigi.contrib.external_program import ExternalProgramTask
 from luigi import format, Parameter, WrapperTask, ExternalTask, Task, LocalTarget
 from luigi.contrib.s3 import S3Target
 from lui_gui.src.target import SuffixPreservingLocalTarget
-from lui_gui.src.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
+from scripts.{{cookiecutter.node3_run_target}} import {{cookiecutter.node3_run_target}}
 
 
 class Run_lui_gui(WrapperTask):
     """
     Wrapper Task - to set Parameters for file download
     """
-    file = Parameter()
-    root = Parameter()
-    print(root)
     def run(self):
-        print("Running Lui_GUI graph!")
+        print("Running Lui_GUI graph {{cookiecutter.dag_name}}!")
 
     def requires(self):
-        file = self.file
-        root = self.root
-        return {{cookiecutter.node_4}}(file,root)
+        return {{cookiecutter.node_4}}
 
 
 class {{cookiecutter.node_2}}(ExternalTask):
     # Fetch S3Target for External File on S3
-    file_ROOT = os.environ.get("FILE_ROOT")  # Root S3 path, as a constant
-
-    model = Parameter() # Filename of the model under the root s3 path
-
-
     def output(self):
         return S3Target("{{cookiecutter.node1_target_entry}}",format=format.Nop) #this is node_1
 
 
 class {{cookiecutter.node_3}}(Task):
     # Download to Local Target
-    file = Parameter()
-    root = Parameter()
-    LOCAL_ROOT = os.path.abspath("temp_run_stylize_subdir") #default root in case of failure
-    S3_ROOT = os.environ.get("S3_ROOT")
-    SHARED_RELATIVE_PATH = 'saved_models'
-
     def requires(self):
         # Depends on the SavedModel ExternalTask being complete
-        return {{cookiecutter.node_2}}(self.file)
+        return {{cookiecutter.node_2}}
 
     def run(self):
         {{cookiecutter.node3_run_target}}(self)
@@ -51,20 +35,15 @@ class {{cookiecutter.node_3}}(Task):
         # s3_atomic_download(self)
 
     def output(self):
-        self.LOCAL_ROOT = os.path.abspath(self.root) #set root directory for LocalTarget
-        return LocalTarget("{{cookiecutter.node3_output_folder}}", self.file, format=format.Nop)
+        return LocalTarget("{{cookiecutter.node3_output_folder}}", format=format.Nop)
 
 
 class {{cookiecutter.node_4}}(ExternalProgramTask):
     """
     Run the external program task {{cookiecutter.node4_run_target}}
     """
-    file = Parameter() #file name
-    root = Parameter()  #subdirectory for model
-    LOCAL_ROOT = os.path.abspath("temp_run_stylize_subdir")
-    output_dir_name = "{{cookiecutter.node5_target_output}}"
-    output_dir = (os.path.join(LOCAL_ROOT, output_dir_name))
 
+    output_folder = '{{cookiecutter.node5_target_output}}'
 
     def requires(self):
         """ Requires {{cookiecutter.node_2}} already downloaded
@@ -72,15 +51,14 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
         Note: passes Luigi Parameters for model
         """
         return {
-            'file': {{cookiecutter.node_3}}(self.file, self.root),
+            'file': {{cookiecutter.node_3}},
         }
 
     def program_args(self):
         """ Command line arguments to call external program {{cookiecutter.node_4}}
         :return args: CLI args
         """
-        return ['{{cookiecutter.node4_run_target}}', os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--file',
-                os.path.join(self.LOCAL_ROOT, {{cookiecutter.node_3}}.SHARED_RELATIVE_PATH, self.file) ,'--output-file', self.temp_output_path ]
+        return ['{{cookiecutter.node4_run_target}} {{cookiecutter.node4_input_params}} {{cookiecutter.node3_output_folder}} {{cookiecutter.node5_target_output}} topleft']
 
     def run(self):
         # create missing directories
@@ -90,8 +68,6 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
             super().run()
 
     def output(self):
-        self.LOCAL_ROOT = os.path.abspath(self.root) #set root directory for SufPresLocTarg
-        self.output_dir = (os.path.join(self.LOCAL_ROOT, self.output_dir_name)) #set output directory for SufPresLocTarg
-        # return SuffixPreservingLocalTarget of the stylized image
-        output_file_name = (os.path.splitext(self.file)[0]+"_processed")
-        return SuffixPreservingLocalTarget("{{cookiecutter.node5_target_output}}",format=format.Nop) # <-- {{cookiecutter.node_5}}
+        self.file_name = os.path.basename(self.output_folder)
+        self.output_file_name = (os.path.splitext(self.file_name)[0]+"_watermarked"+os.path.splitext(self.file_name)[1])
+        return SuffixPreservingLocalTarget(os.path.join(self.output_folder, self.output_file_name),format=format.Nop) # <-- {{cookiecutter.node_5}}
