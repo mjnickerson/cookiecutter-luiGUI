@@ -13,7 +13,12 @@ class Run_{{cookiecutter.graph_folder}}(WrapperTask):
         print("Running Lui_GUI graph {{cookiecutter.graph_folder}}!")
 
     def requires(self):
+        { % if cookiecutter.active_nodes == '12345' - %}
         return {{cookiecutter.node_4}}()
+        { % endif - %}
+        {% if cookiecutter.active_nodes == '123' -%}
+        return {{cookiecutter.node_3}}()
+        {% endif -%}
 
 
 class {{cookiecutter.node_2}}(ExternalTask):
@@ -39,6 +44,7 @@ class {{cookiecutter.node_3}}(Task):
         return LocalTarget(r"{{cookiecutter.node3_output_folder}}\{{cookiecutter.node1_target_filename}}", format=format.Nop)
 
 
+{% if cookiecutter.active_nodes == '12345' - %}
 class {{cookiecutter.node_4}}(ExternalProgramTask):
     """
     Run the external program task {{cookiecutter.node4_run_target}}
@@ -63,3 +69,4 @@ class {{cookiecutter.node_4}}(ExternalProgramTask):
         self.file_name = os.path.basename(self.source_image)
         self.output_file_name = (os.path.splitext(self.file_name)[0]+"_watermarked"+os.path.splitext(self.file_name)[1])
         return LocalTarget(os.path.join(self.output_folder, self.output_file_name), format=format.Nop) # <-- {{cookiecutter.node_5}}
+{% endif - %}
